@@ -15,19 +15,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * version.php
+ *
  *
  * @package   plagiarism_urkund
- * @author    Dan Marsden <dan@danmarsden.com>
- * @copyright 2011 onwards Dan Marsden
+ * @copyright 2024 Department of Computer and System Sciences,
+ *         Stockholm University {@link http://dsv.su.se}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
-
-$plugin->version = 2024121600;
-$plugin->requires = 2024092700; // Requires 4.5.
-$plugin->cron     = 0; // Cron function no longer used.
-$plugin->component = 'plagiarism_urkund';
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '4.0.3';
+$callbacks = [
+    [
+        'hook' => \core\hook\output\before_standard_top_of_body_html_generation::class,
+        'callback' => [\plagiarism_urkund\hook_callbacks::class, 'before_standard_top_of_body_html_generation'],
+        'priority' => 0,
+    ],
+];
